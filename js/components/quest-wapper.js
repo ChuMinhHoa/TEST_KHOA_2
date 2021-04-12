@@ -1,12 +1,14 @@
 const $template = document.createElement("template");
 $template.innerHTML=/*html */
 ` <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
-<div class="rounded border border-dark d-inline-block p-3">
+<link rel="stylesheet" href="./css/style.css">
+<div class="rounded border border-dark d-inline-block p-3 w-100 m-3 position-relative">
+    <div class="panel" id="panel"></div>
     <div class="question">
         <h1 id="question">cau hoi 1?</h1>
     </div>
     <div id="all" class="d-none"></div>
-    <div class="dapan rounded border border-dark p-4" style="column-count:2;" id="answers">
+    <div class="dapan rounded border border-dark p-4 row w-100 m-0"  id="answers">
         
     </div>
     <div class="correct_answer d-none" id="correct">hhh</div>
@@ -20,7 +22,8 @@ export default class QuestionWrapper extends HTMLElement{
         this.shadowRoot.appendChild($template.content.cloneNode(true));
         this.$question=this.shadowRoot.getElementById('question');
         this.$answers=this.shadowRoot.getElementById('answers');
-        this.$correct=this.shadowRoot.getElementById('correct');
+        this.$correct=this.shadowRoot.getElementById('correct');        
+
         this.$all=this.shadowRoot.getElementById('all');
         
     }
@@ -34,6 +37,7 @@ export default class QuestionWrapper extends HTMLElement{
             let $answers_new=document.createElement('answers-wrapper');
             let random=Math.floor(Math.random() * data.length);
             $answers_new.setAttribute("answer",data[random]);
+            $answers_new.classList.add("col-6");
             if(this.$correct.innerHTML==data[random]){
                 $answers_new.setAttribute("correct","true");
             }
