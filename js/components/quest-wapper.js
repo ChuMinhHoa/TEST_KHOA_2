@@ -6,7 +6,7 @@ $template.innerHTML=/*html */
         <h1 id="question">cau hoi 1?</h1>
     </div>
     <div id="all" class="d-none"></div>
-    <div class="dapan rounded border border-dark" style="column-count:2;" id="answers">
+    <div class="dapan rounded border border-dark p-4" style="column-count:2;" id="answers">
         
     </div>
     <div class="correct_answer d-none" id="correct">hhh</div>
@@ -34,11 +34,17 @@ export default class QuestionWrapper extends HTMLElement{
             let $answers_new=document.createElement('answers-wrapper');
             let random=Math.floor(Math.random() * data.length);
             $answers_new.setAttribute("answer",data[random]);
+            if(this.$correct.innerHTML==data[random]){
+                $answers_new.setAttribute("correct","true");
+            }
             this.$answers.appendChild($answers_new); 
             console.log(data[random]);
             data.splice(random,1);
             
         }
+    }
+    check(aw){
+        return aw==this.$correct.innerHTML;
     }
     attributeChangedCallback(attrName,oldValue,newValue){
         
@@ -51,8 +57,8 @@ export default class QuestionWrapper extends HTMLElement{
                 break;
             case 'correct':
                 this.$all.innerHTML+=","+newValue;
-                this.randomcautraloi();
                 this.$correct.innerHTML=newValue;
+                this.randomcautraloi();
                 break;
         }
     }
