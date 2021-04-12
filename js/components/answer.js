@@ -1,3 +1,4 @@
+import {diem} from '../point.js'
 const $template=document.createElement("template");
 $template.innerHTML=/*html */
 `
@@ -27,6 +28,7 @@ export default class Answer extends HTMLElement{
         this.$bu.onclick=()=>{
             if(this.correct=="true") alert("dung")
             else alert("sai");
+            console.log(get);
         }
     }
     
